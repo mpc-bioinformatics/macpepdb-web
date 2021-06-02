@@ -75,7 +75,7 @@
                             <td>
                                 {{ protein.name }}
                             </td>
-                            {% set taxonomy = taxonomies[protein.taxonomy_id] %}
+                            {% set taxonomy = taxonomies.get(protein.taxonomy_id, protein.taxonomy_id) %}
                             <td>
                                 <a href="https://www.uniprot.org/taxonomy/{{ taxonomy.id }}" target="_blank">{{ taxonomy.name }} ({{ taxonomy.id }})</a>
                             </td>
