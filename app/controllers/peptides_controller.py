@@ -63,7 +63,8 @@ class PeptidesController(ApplicationController):
         return render_template(
             "peptides/show.j2",
             peptide = peptide,
-            proteins = proteins,
+            reviewed_proteins = list(filter(lambda protein: protein.is_reviewed, proteins)),
+            unreviewed_proteins = list(filter(lambda protein: not protein.is_reviewed, proteins)),
             taxonomies = taxonomies
         )
 

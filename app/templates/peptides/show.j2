@@ -1,5 +1,7 @@
 {% extends "layouts/public.j2" %}
 
+{% from "peptides/_protein_table.j2" import protein_table %}
+
 {% block body %}
     <div id="peptide-view">
         <h1>Peptide: {{ peptide.sequence }}</h1>
@@ -50,39 +52,10 @@
             </tbody>
         </table>
 
-        <h2>Proteins</h2>
-        <div class="table-responsive-sm">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Accession
-                        </th>
-                        <th>
-                            Proteinname
-                        </th>
-                        <th>
-                            Taxonomy
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for protein in proteins %}
-                        <tr>
-                            <th>
-                                <a href="{{ url_for("protein_path", accession = protein.accession) }}" target="_blank">{{ protein.accession }}</a>
-                            </th>
-                            <td>
-                                {{ protein.name }}
-                            </td>
-                            {% set taxonomy = taxonomies.get(protein.taxonomy_id, protein.taxonomy_id) %}
-                            <td>
-                                <a href="https://www.uniprot.org/taxonomy/{{ taxonomy.id }}" target="_blank">{{ taxonomy.name }} ({{ taxonomy.id }})</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <h2>Reviewed proteins (SwissProt)</h2>
+        {{ protein_table(reviewed_proteins, taxonomies) }}
+
+        <h2>Unreviewed proteins (TrEMBL)</h2>
+        {{ protein_table(unreviewed_proteins, taxonomies) }}
     </div>
 {% endblock %}
