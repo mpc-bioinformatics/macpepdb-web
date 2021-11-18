@@ -56,6 +56,13 @@
         {{ protein_table(reviewed_proteins, taxonomies) }}
 
         <h2>Unreviewed proteins (TrEMBL)</h2>
-        {{ protein_table(unreviewed_proteins, taxonomies) }}
+        <button type="button" class="btn btn-primary btn-sm" @click="toggleUnreviewedProteins">
+            <span v-if="!show_unreviewd_proteins">show</span>
+            <span v-else>hide</span>
+            <i class="fas" :class="{'fa-caret-down': !show_unreviewd_proteins, 'fa-caret-up': show_unreviewd_proteins}"></i>
+        </button>
+        <Collapsible :is_collapsed="show_unreviewd_proteins">
+            {{ protein_table(unreviewed_proteins, taxonomies) }}
+        <Collapsible>
     </div>
 {% endblock %}
