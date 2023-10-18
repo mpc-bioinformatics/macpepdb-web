@@ -1,3 +1,6 @@
+**The development of MaCPepDB Web is moved to a new repository: https://github.com/medbioinf/macpepdb-frontend**
+
+
 # MaCPepDB Web
 MaCPepDB web is a web GUI for the MaCPepDB web API.
 
